@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Fixed Expenses";
+}
+
+@model List<MyBudget.Entity.FixedExpense>
+
+<div class="text-center">
+    <h1 class="display-4">Fixed Expenses</h1>
+    <br />
+    <hr />
+    <br />
+    <h4> Balance  @ViewBag.balance</h4>
+    <br />
+    <h6>Total Fixed Expenses  @ViewBag.FixedExpenses</h6>
+    <br />
+    <a asp-controller="home" asp-action="FixedExpensesAddEdit" class="btn btn-primary">Add</a>
+    <br />
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var FixedExpense in Model)
+                {
+                    <tr>
+                        <td>
+                            @FixedExpense.Description
+                        </td>
+                        <td>
+                            @FixedExpense.Amount.ToString("C")
+                        </td>
+                        <td>
+                            <small>
+                                @FixedExpense.Date
+                            </small>
+                        </td>
+                        <td>
+                            <a asp-action="FixedExpensesAddEdit" asp-route-id="@FixedExpense.ID" style="text-decoration:none;" title="Edit">✎⠀</a>
+                            <a asp-action="FixedExpensesDelete" asp-route-id="@FixedExpense.ID" style="text-decoration:none;" title="Remove">⨉</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

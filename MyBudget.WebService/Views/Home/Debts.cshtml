@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Debts ";
+}
+
+@model List<MyBudget.Entity.Debt>
+
+<div class="text-center">
+    <h1 class="display-4">Debts</h1>
+    <br />
+    <hr />
+    <br />
+    <h4> Balance  @ViewBag.balance </h4>
+    <br />
+    <h6>Total Debts  @ViewBag.Debts</h6>
+    <br />
+    <a asp-controller="home" asp-action="DebtsAddEdit" class="btn btn-primary">Add</a>
+    <br />
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var Debt in Model)
+                {
+                    <tr>
+                        <td>
+                            @Debt.Description
+                        </td>
+                        <td>
+                            @Debt.Amount.ToString("C")
+                        </td>
+                        <td>
+                            <small>
+                                @Debt.Date
+                            </small>
+                        </td>
+                        <td>
+                            <a asp-action="DebtsAddEdit" asp-route-id="@Debt.ID" style="text-decoration:none;" title="Edit">✎⠀</a>
+                            <a asp-action="DebtsDelete" asp-route-id="@Debt.ID" style="text-decoration:none;" title="Remove">⨉</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

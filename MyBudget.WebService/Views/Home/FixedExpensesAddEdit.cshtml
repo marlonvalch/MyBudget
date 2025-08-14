@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Fixed Expenses";
+}
+
+@model MyBudget.Entity.FixedExpense
+
+<div class="text-center">
+    <h3 class="display-4">Fixed Expenses</h3>
+</div>
+<br />
+<div class="text-center">
+    <h5 class="display-6">Add / Edit</h5>
+</div>
+<br>
+<br>
+<form asp-action="FixedExpensesAddEditForm" asp-controller="Home">
+    <div class="text-center">
+        <input hidden class="form-control " type="number" placeholder="0" asp-for="ID" />
+        <br>
+        <label class="mt-4">Description</label>
+        <br>
+        <input class="form-control" type="text" maxlength="70" placeholder="Add a description" asp-for="Description" required />
+        <br>
+        <label class="mt-4">Amount</label>
+        <br>
+        <span class="input-group-text">
+            $⠀
+            <input class="form-control" type="number" maxlength="30" max="100000000000" min="0" placeholder="Enter the amount" asp-for="Amount" step="0.01" required />
+        </span>
+        <br>
+        <label class="mt-4">Date</label>
+        <br>
+        <input type="date" asp-for="Date" />
+        <br>
+        <br>
+        <button class="btn btn-primary" type="submit">Add</button>
+
+    </div>
+</form>
+<br>
+<br>
+
+<a asp-controller="home" asp-action="FixedExpenses" class="btn btn-secondary">back</a>
+

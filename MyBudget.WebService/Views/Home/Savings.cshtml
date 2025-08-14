@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Savings";
+}
+
+@model List<MyBudget.Entity.Saving>
+
+<div class="text-center">
+    <h1 class="display-4">Savings</h1>
+    <br />
+    <hr />
+    <br />
+    <h4> Balance  @ViewBag.balance </h4>
+    <br />
+    <h6>Total Savings  @ViewBag.Savings</h6>
+    <br />
+    <a asp-controller="home" asp-action="SavingsAddEdit" class="btn btn-primary">Add</a>
+    <br />
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var Saving in Model)
+                {
+                    <tr>
+                        <td>
+                            @Saving.Description
+                        </td>
+                        <td>
+                            @Saving.Amount.ToString("C")
+                        </td>
+                        <td>
+                            <small>
+                                @Saving.Date
+                            </small>
+                        </td>
+                        <td>
+                            <a asp-action="SavingsAddEdit" asp-route-id="@Saving.ID" style="text-decoration:none;" title="Edit">✎⠀</a>
+                            <a asp-action="SavingsDelete" asp-route-id="@Saving.ID" style="text-decoration:none;" title="Remove">⨉</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

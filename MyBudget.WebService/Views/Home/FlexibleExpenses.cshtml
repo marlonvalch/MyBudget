@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "Flexible Expenses";
+}
+
+@model List<MyBudget.Entity.FlexibleExpense>
+
+<div class="text-center">
+    <h1 class="display-4">Flexible Expenses</h1>
+    <br />
+    <hr />
+    <br />
+    <h4> Balance  @ViewBag.balance</h4>
+    <br />
+    <h6>Total Flexible Expenses  @ViewBag.FlexibleExpenses </h6>
+    <br />
+    <a asp-controller="home" asp-action="FlexibleExpensesAddEdit" class="btn btn-primary">Add</a>
+    <br />
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var FlexibleExpense in Model)
+                {
+                    <tr>
+                        <td>
+                            @FlexibleExpense.Description
+                        </td>
+                        <td>
+
+                            @FlexibleExpense.Amount.ToString("C")
+                        </td>
+                        <td>
+                        <small>
+                            @FlexibleExpense.Date
+                        </small>
+                        </td>
+                        <td>
+                            <a asp-action="FlexibleExpensesAddEdit" asp-route-id="@FlexibleExpense.ID" style="text-decoration:none;" title="Edit">✎⠀</a>
+                            <a asp-action="FlexibleExpensesDelete" asp-route-id="@FlexibleExpense.ID" style="text-decoration:none;" title="Remove">⨉</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
