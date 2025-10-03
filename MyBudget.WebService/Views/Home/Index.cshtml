@@ -1,7 +1,75 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    var labels = ViewBag.PieLabels as string[];
+    var data = ViewBag.PieData as double[];
+    var total = data?.Sum() ?? 0;
 }
 
 <div class="text-center">
     <h1 class="display-4">My Budget</h1>
 </div>
+
+<style>
+    .chart-box {
+        width: 420px;
+        height: 420px;
+        position: relative;
+        margin: 0 auto;
+    }
+
+        .chart-box canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+</style>
+
+<div class="chart-box">
+    <canvas id="budgetPie"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const chartData = {
+        labels: [
+    @for (int i = 0; i < labels.Length; i++)
+    {
+        <text>"@labels[i]"@((i < labels.Length - 1) ? "," : "")</text>
+    }
+        ],
+        datasets: [{
+            data: [
+    @for (int i = 0; i < data.Length; i++)
+    {
+        <text>@data[i].ToString(System.Globalization.CultureInfo.InvariantCulture)@((i < data.Length - 1) ? "," : "")</text>
+    }
+            ],
+            backgroundColor: ['#FF6384','#36A2EB','#FFCE56','#4BC0C0','#9966FF']
+        }]
+    };
+
+    const total = @total.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+    const config = {
+        type: 'pie',
+        data: chartData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,   
+            radius: '92%',                
+            plugins: {
+                legend: { position: 'bottom' },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const value = context.parsed;
+                            const percent = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
+                            return `${label}: $${value} (${percent}%)`;
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    new Chart(document.getElementById('budgetPie'), config);
+</script>

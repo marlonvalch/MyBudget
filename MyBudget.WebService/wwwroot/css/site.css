@@ -1,22 +1,90 @@
-html {
-  font-size: 14px;
+html, body {
+    background-color: #f8f9fa;
+    color: #212529; 
+    font-family: 'Segoe UI', 'Arial', sans-serif;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+h1, h2, h3, h4, h5 {
+    color: #1a237e; 
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.container, main, .content {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 2rem;
+    margin-top: 2rem;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+table {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    width: 100%;
+    margin-bottom: 1.5rem;
 }
 
-body {
-  margin-bottom: 60px;
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
 }
+
+th {
+    background-color: #f1f3f4;
+    color: #495057;
+    font-weight: 500;
+}
+
+.debts-table tr:nth-child(even) {
+    background-color: #f3e5f5; 
+}
+
+.savings-table tr:nth-child(even) {
+    background-color: #e8f5e9  ; 
+}
+
+.flexible-expenses-table tr:nth-child(even) {
+    background-color:pink; 
+}
+
+.fixed-expenses-table tr:nth-child(even) {
+    background-color: #e0f7fa; 
+}
+
+.income-table tr:nth-child(even) {
+    background-color: #fff3e0; 
+}
+
+.btn, .btn-primary {
+    background-color: midnightblue;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+    .btn:hover, .btn-primary:hover {
+        background-color: blue;
+        color: #fff;
+    }
+
+.negative-balance {
+    color: #d32f2f;
+}
+
+
+.navbar {
+    background-color: midnightblue !important; 
+}
+
+    .navbar .navbar-nav .nav-link {
+        color: #fff !important; 
+    }
+
+   

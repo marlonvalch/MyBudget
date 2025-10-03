@@ -1,5 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Fixed Expenses";
+    /*coloring the negative ammount of balance to red based on the site CSS:*/
+    var balanceStr = ViewBag.balance?.ToString();
+    double balanceValue = 0;
+
+    double.TryParse(
+        balanceStr?.Replace("$", "").Replace(",", "").Replace("(", "-").Replace(")", "").Trim(),
+        out balanceValue
+    );
+    var balanceClass = balanceValue < 0 ? "negative-balance" : "";
+
+    // Formatting balance
+    var formattedBalance = balanceValue < 0
+        ? $"-${Math.Abs(balanceValue):N2}"
+        : $"${balanceValue:N2}";
 }
 
 @model List<MyBudget.Entity.FixedExpense>
@@ -9,14 +23,14 @@
     <br />
     <hr />
     <br />
-    <h4> Balance  @ViewBag.balance</h4>
+    <h4> Balance <span class="@balanceClass">@formattedBalance</span> </h4>
     <br />
     <h6>Total Fixed Expenses  @ViewBag.FixedExpenses</h6>
     <br />
     <a asp-controller="home" asp-action="FixedExpensesAddEdit" class="btn btn-primary">Add</a>
     <br />
     <br />
-    <table class="table">
+    <table class="fixed-expenses-table">
         <thead>
             <tr>
                 <th>

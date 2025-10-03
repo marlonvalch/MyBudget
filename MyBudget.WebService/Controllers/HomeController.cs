@@ -20,6 +20,15 @@ namespace MyBudget.WebService.Controllers
 
         public IActionResult Index()
         {
+            var totalFlexible = _context.flexibleExpenses.Sum(e => e.Amount);
+            var totalFixed = _context.fixedExpenses.Sum(e => e.Amount);
+            var totalIncome = _context.income.Sum(e => e.Amount);
+            var totalSaving = _context.savings.Sum(e => e.Amount);
+            var totalDebt = _context.debts.Sum(e => e.Amount);
+
+            ViewBag.PieLabels = new[] { "Flexible Expenses", "Fixed Expenses", "Income", "Savings", "Debts" };
+            ViewBag.PieData = new[] { totalFlexible, totalFixed, totalIncome, totalSaving, totalDebt };
+
             return View();
         }
 
